@@ -22,6 +22,6 @@ export const useFatchRecipientUser = (chat, user) =>{
         }
         // alert(recipientUser);
         getUser()
-    },[recipientId]) ;
+    },[recipientId]) ; 
     return {recipientUser,error};
 }

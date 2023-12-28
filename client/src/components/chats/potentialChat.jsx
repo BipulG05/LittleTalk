@@ -4,7 +4,7 @@ import { AuthContext } from "../../context/AuthContext";
 
 const PotentialChats = () => {
     const {user} = useContext(AuthContext);
-    const {potentialChats,createChat} = useContext(ChatContext);
+    const {potentialChats,createChat,onlineusers} = useContext(ChatContext);
     // console.log("pchats",potentialChats);
     
     return ( 
@@ -15,7 +15,12 @@ const PotentialChats = () => {
                
                     <div className="single-user" key={index} onClick={ () => createChat(user._id,U._id)}>
                         {U.name}
-                        <span className="user-online"></span>
+                        <span 
+                        className={
+                            onlineusers?.some((user)=>user?.userId === U?._id)?
+                            "user-online" :"user-offline"
+                        }
+                        ></span>
                     </div>
                 
             ))}

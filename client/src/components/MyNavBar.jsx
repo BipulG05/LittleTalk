@@ -2,6 +2,7 @@ import { Container,Nav,Navbar,Stack } from "react-bootstrap";
 import {Link} from 'react-router-dom';
 import { AuthContext } from "../context/AuthContext";
 import { useContext } from 'react';
+import Notification from "./chats/Notification";
 
 
 
@@ -21,6 +22,7 @@ const {user,logoutuser} = useContext(AuthContext);
                             user && 
                             (
                                 <>
+                                    <Notification/>
                                     <Link onClick={()=>{
                                         logoutuser();
                                     }} to='/login' className="link-light text-decoration-none">Logout </Link>
