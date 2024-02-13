@@ -5,6 +5,7 @@ import UserChat from "../components/chats/UserChat";
 import {AuthContext}from "../context/AuthContext";
 import PotentialChats from "../components/chats/potentialChat";
 import ChatBox from "../components/chats/ChatBox";
+import "../pages/css/ChatSlide.css";
 
 const Chat = () => {
     const {user} = useContext(AuthContext);
@@ -19,8 +20,8 @@ const Chat = () => {
             userChats?.lengh < 1 ? null :
             <Stack direction="horizontal" 
             gap={4} 
-            className="align-items-start">
-                <Stack className="messages-box flex-grow-0 pe-3" gap={3}>
+            className="align-items-start userHand">
+                <Stack id="ph-mas-box" className="messages-box flex-grow-0 pe-3" gap={3}>
                     {isUserChatLoading && <p>Loading Chats...</p>}
                     {userChats?.map((chat,index)=>{
                         return(

@@ -3,6 +3,7 @@ import {Link} from 'react-router-dom';
 import { AuthContext } from "../context/AuthContext";
 import { useContext } from 'react';
 import Notification from "./chats/Notification";
+import { FaRegUserCircle } from "react-icons/fa";
 
 
 
@@ -26,7 +27,10 @@ const {user,logoutuser} = useContext(AuthContext);
                                     <Link onClick={()=>{
                                         logoutuser();
                                     }} to='/login' className="link-light text-decoration-none">Logout </Link>
+
+                                    <Link to='/profile' className="link-light text-decoration-none" ><FaRegUserCircle size={"1.5em"} /></Link>
                                 </>
+                                
                             )
                         }
                         {

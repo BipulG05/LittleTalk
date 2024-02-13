@@ -25,23 +25,32 @@ const UserChat = ({chat,user}) => {
         }
         return shortText
     }
+    const phoneVchat = () =>{
+        const chatbox1 = document.getElementById("Ph-chatbox");
+        const chatbox2 = document.getElementById("ph-mas-box");
+
+        chatbox1.classList.add("Show-Mob-V");
+        chatbox2.classList.add("hide-Mob-V");
+
+    }
 
 
     return (
     <>
-    <Stack direction="horizontal" gap={3} 
-    className="user-card align-items-center p-2 justify-content-between"
+    <Stack direction="horizontal"  
+    className="user-card align-items-center justify-content-between MobVuser-card"
     role="button"
     onClick={()=>{
         if(thisUserNotification?.length !==0){
             markThisUsernotificationAsRead(thisUserNotification,notification);
         }
+        phoneVchat();
         
     }}
     >
         <div className="d-flex">
             <div className="me-2" style={{"padding":"7px 5px"}}>
-                <img src={avatar} height="30px"/>
+                <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava1-bg.webp" height="30px"/>
             </div>
             <div className="text-content">
                 <div className="name">

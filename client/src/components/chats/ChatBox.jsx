@@ -27,7 +27,7 @@ const ChatBox = () => {
     // alert(recipientUser)
     if(!recipientUser){
         return (
-            <p style={{textAlign:"center",width:"100%"}}>
+            <p id='NoConSec' style={{textAlign:"center",width:"100%"}}>
                 No conversation selected ..
             </p>
         )
@@ -42,13 +42,13 @@ const ChatBox = () => {
     return ( 
     <>
     
-        <Stack gap={4} className="chat-box">
+        <Stack id="Ph-chatbox" className="chat-box">
             <div className="chat-header">
                 <strong>
                     {recipientUser?.name}
                 </strong>
             </div>
-            <Stack gap={3} className="messages" >
+            <Stack  className="messages" >
                 {messages && messages.map((message,index)=>
                     <Stack key={index} className={`${message?.senderId===user?._id ? "message self align-self-end flex-grow-0":"message align-self-start flex-grow-0"}`}
                     ref = {scroll}>
@@ -58,7 +58,7 @@ const ChatBox = () => {
                     </Stack>
                 )}
             </Stack>
-            <Stack direction="horizontal" gap={3} className="chat-input flex-grow-0">
+            <Stack direction="horizontal"  className="chat-input flex-grow-0">
                 <InputEmoji value={textMessage} onChange={setTextMessage} fontFamily="nunito" borderColor="rgba(72,112,233,0.2)" />
                 <button className="send-btn" style={{"backgroundColor":"#f8f9fa","padding":"5px 5px"}} onClick={()=>sendTextMessage(textMessage,user,currentChats._id,setTextMessage)}>
                     <IoSend color="green"   />
