@@ -10,11 +10,12 @@ import { IoSend } from "react-icons/io5";
 
 
 
-const ChatBox = () => {
+const ChatBox = ({windowHeight}) => {
     const {user} = useContext(AuthContext);
     const {currentChats,messages,isMassagesLoading,messageError,sendTextMessage} = useContext(ChatContext);
     // console.log(currentChats)
     const {recipientUser} = useFatchRecipientUser(currentChats,user);
+    
     const [textMessage,setTextMessage] = useState("");
     const scroll = useRef();
 
@@ -39,10 +40,15 @@ const ChatBox = () => {
             </p>
         )
     }
+    const handleKeyPress = (e) => {
+        if (e.key === "Enter") {
+          sendTextMessage(textMessage,user,currentChats._id,setTextMessage);
+        }
+      };
     return ( 
     <>
     
-        <Stack id="Ph-chatbox" className="chat-box">
+        <Stack id="Ph-chatbox" className="chat-box" style={{ height: `${windowHeight * 0.8}px` }}>
             <div className="chat-header">
                 <strong>
                     {recipientUser?.name}
@@ -59,7 +65,7 @@ const ChatBox = () => {
                 )}
             </Stack>
             <Stack direction="horizontal"  className="chat-input flex-grow-0">
-                <InputEmoji value={textMessage} onChange={setTextMessage} fontFamily="nunito" borderColor="rgba(72,112,233,0.2)" />
+                <InputEmoji  value={textMessage} onChange={setTextMessage} onKeyDown={handleKeyPress} fontFamily="nunito" borderColor="rgba(72,112,233,0.2)" />
                 <button className="send-btn" style={{"backgroundColor":"#f8f9fa","padding":"5px 5px"}} onClick={()=>sendTextMessage(textMessage,user,currentChats._id,setTextMessage)}>
                     <IoSend color="green"   />
                 </button>

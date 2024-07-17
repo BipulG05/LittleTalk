@@ -16,7 +16,9 @@ const {user,logoutuser} = useContext(AuthContext);
                 <h4>
                     <Link to='/' className="link-light text-decoration-none ">Little Talk</Link>
                 </h4>
-                <span className="text-warning">{user?`Logged in as ${user?.name}`:"Welcome to LittleTalk"}</span>
+                {/* <span className="text-warning">{user?`Logged in as ${user?.name}`:"Welcome to LittleTalk"}</span> */}
+                <span className="text-warning">{user?` ${user?.name}`:"Welcome to LittleTalk"}</span>
+
                 <Nav>
                     <Stack direction="horizontal" gap={3}>
                         {

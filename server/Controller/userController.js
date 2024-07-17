@@ -201,7 +201,7 @@ const loginUser = async (req,res) => {
                 //   });
                 userModel.deleteOne({ _id: user._id })
                 .then(() => {
-                    console.log('It is a guest account so it was deleted');
+                    alert('It is a guest account so it was deleted');
                 })
                 .catch(err => {
                     console.llog(err);

@@ -10,6 +10,9 @@ import { AuthContext } from './context/AuthContext';
 import { ChatContextProvider } from './context/ChatsContext';
 import Account from './pages/Account';
 import EditAccount from './pages/EditAccount';
+import UserMenuChat from './pages/UserMenuChat';
+import ChatBox from './components/chats/ChatBox';
+import SearchUser from './components/chats/SearchUser';
 
 
 
@@ -27,6 +30,9 @@ function App() {
           <Route path="/editaccount" element={user ?<EditAccount/>:<Register/> }/>
           <Route path="/register" element={user ?<Chat/>:<Register/> }/>
           <Route path="/login" element={user ? <Chat/>:<Login/> }/>
+          <Route path="/onlyusermenu" element={user ? <UserMenuChat/>:<Login/> }/>
+          <Route path="/userchat" element={user ? <ChatBox/>:<Login/> }/>
+          <Route path="/searchuser" element={user ? <SearchUser/>:<Login/> }/>
           <Route path="*" element={<Navigate to="/"/> }/>
         </Routes>
       </Container>

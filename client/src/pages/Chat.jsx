@@ -1,44 +1,63 @@
-import { useContext } from "react";
-import { ChatContext } from "../context/ChatsContext";
-import { Container, Stack} from 'react-bootstrap'
-import UserChat from "../components/chats/UserChat";
-import {AuthContext}from "../context/AuthContext";
-import PotentialChats from "../components/chats/potentialChat";
-import ChatBox from "../components/chats/ChatBox";
-import "../pages/css/ChatSlide.css";
+import React, { useState, useEffect } from "react";
+import { Container } from "react-bootstrap";
+import UserMenuChat from "./UserMenuChat"; // Adjust the path as per your project structure
+import ChatBox from "../components/chats/ChatBox"; // Adjust the path as per your project structure
+import UserMenuChatMob from "./UserMenuChatMob";
 
-const Chat = () => {
-    const {user} = useContext(AuthContext);
-    const {userChats, isUserChatLoading,userChatsError,updateCurrentChats} = useContext(ChatContext);
-    // console.log("userchats",userChats);
-    
-    return ( 
-    <>
+const App = () => {
+  const [windowWidth, setWindowWidth] = useState(window.innerWidth);
+  const [windowHeight, setwindowHeight] = useState(window.innerHeight);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setWindowWidth(window.innerWidth);
+      setwindowHeight(window.innerHeight);
+    };
+
+    window.addEventListener("resize", handleResize);
+
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
+
+//    useEffect(() => {
+//         const handleResize = () => {
+//             setWindowWidth(window.innerWidth);
+//             setwindowHeight(window.innerHeight);
+//         };
+
+//         // Add event listener for window resize
+//         window.addEventListener('resize', handleResize);
+
+//         // Call handleResize once initially to set the initial dimensions
+//         handleResize();
+
+//         // Clean up event listener when component unmounts
+//         return () => {
+//             window.removeEventListener('resize', handleResize);
+//         };
+//     }, []); // Empty dependency array ensures this effect runs only once
+  
+
+  return (
     <Container>
-        <PotentialChats/>
-        {
-            userChats?.lengh < 1 ? null :
-            <Stack direction="horizontal" 
-            gap={4} 
-            className="align-items-start userHand">
-                <Stack id="ph-mas-box" className="messages-box flex-grow-0 pe-3" gap={3}>
-                    {isUserChatLoading && <p>Loading Chats...</p>}
-                    {userChats?.map((chat,index)=>{
-                        return(
-                            <div key={index} onClick={()=> updateCurrentChats(chat)}>
-                                <UserChat chat={chat} user={user} />
-                            </div>
-                        )
-                    })}
-                </Stack>
-                <ChatBox/>
-            </Stack>
-
-
-        }
+      {windowWidth >= 600 ? (
+        <div class="row">
+          <div className="col-6"  >
+            <UserMenuChat />
+          </div>
+          <div className="col-6" >
+            <ChatBox windowHeight={windowHeight} />
+          </div>
+        </div>
+      ) : (
+        <div className="row">
+          <UserMenuChatMob />
+        </div>
+      )}
     </Container>
-    </> 
-    );
-}
- 
-export default Chat;
+  );
+};
+
+export default App;
